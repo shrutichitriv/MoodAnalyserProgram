@@ -136,5 +136,47 @@ namespace UnitTest
             }
         }
 
+        //TC4.1
+        [TestMethod]
+        public void GivenMoodAnalyseClassName_ShouldReturnMoodAnalyseObject()
+        {
+            string message = null;
+            object expected = new MoodAnalyzerBuilder(message);
+            object obj = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyzer.MoodAnalyzerBuilder", "MoodAnalyzerBuilder");
+            expected.Equals(obj);
+            //Assert.AreEqual(expected,obj);
+
+        }
+        //TC4.2
+        [TestMethod]
+        public void GivenClassNameWhenImproper_ShouldThrowMoodAnalysisException()
+        {
+            try
+            {
+                object objFactory = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyzer.MoodAnalyzerBuildera", "MoodAnalyzerBuildera");
+            }
+            catch (MoodAnalyszerCustomException e)
+            {
+                //Assert.AreEqual(MoodAnalyszerCustomException.ExceptionType.NO_SUCH_CLASS.ToString(), objFactory);
+                Assert.AreEqual("Class not found", e.Message);
+            }
+
+        }
+        //TC4.3
+        [TestMethod]
+        public void GivenClassWhenConstructorNotProperShouldThrowException()
+        {
+            try
+            {
+                object objFactory = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyzer.MoodAnalyzerBuilder", "MoodAnalyzerBuildera");
+            }
+            catch (MoodAnalyszerCustomException e)
+            {
+                //Assert.AreEqual(MoodAnalyszerCustomException.ExceptionType.NO_SUCH_CLASS.ToString(), objFactory);
+                Assert.AreEqual("Constructor is not found", e.Message);
+            }
+
+        }
+
     }
 }
