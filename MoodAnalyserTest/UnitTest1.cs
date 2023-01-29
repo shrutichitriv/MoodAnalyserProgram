@@ -78,27 +78,63 @@ namespace UnitTest
     //    }
     //}
 
+    //[TestClass]
+    //public class rf1
+    //{
+    //    public RF1 rf;
+    //    [TestMethod]
+    //    public void TM1()
+    //    {
+    //        string expected = "SAD";
+    //        string msg = "I Am SAD";
+    //        rf = new RF1(msg);
+    //        string value = rf.analysemood();
+    //        Assert.AreEqual(expected, value);
+    //    }
+    //    [TestMethod]
+    //    public void TM11()
+    //    {
+    //        string expected = "HAPPY";
+    //        string msg = "I Am HAPPY";
+    //        rf = new RF1(msg);
+    //        string value = rf.analysemood();
+    //        Assert.AreEqual(expected, value);
+    //    }
+    //}
+
     [TestClass]
-    public class rf1
+    public class UnitTest1
     {
-        public RF1 rf;
         [TestMethod]
-        public void TM1()
+        //TC3.1
+        public void Given_NULL_Mood_Should_Throw_MoodAnalyszerCustomException()
         {
-            string expected = "SAD";
-            string msg = "I Am SAD";
-            rf = new RF1(msg);
-            string value = rf.analysemood();
-            Assert.AreEqual(expected, value);
+            try
+            {
+                string message = null;
+                MoodAnalyzerBuilder moodAnalyzer = new MoodAnalyzerBuilder(message);
+                string mood = moodAnalyzer.AnalyseMood();
+            }
+            catch (MoodAnalyszerCustomException e)
+            {
+                Assert.AreEqual("Mood should not be null", e.Message);
+            }
         }
         [TestMethod]
-        public void TM11()
+        //TC3.2
+        public void Given_Empyt_Mood_Should_Throw_MoodAnalyszerCustomException()
         {
-            string expected = "HAPPY";
-            string msg = "I Am HAPPY";
-            rf = new RF1(msg);
-            string value = rf.analysemood();
-            Assert.AreEqual(expected, value);
+            try
+            {
+                string message = "";
+                MoodAnalyzerBuilder moodAnalyzer = new MoodAnalyzerBuilder(message);
+                string mood = moodAnalyzer.AnalyseMood();
+            }
+            catch (MoodAnalyszerCustomException e)
+            {
+                Assert.AreEqual("Mood should not be empty", e.Message);
+            }
         }
+
     }
 }
