@@ -214,6 +214,27 @@ namespace UnitTest
                 Assert.AreEqual("Constructor is not found", e.Message);
             }
         }
+        //TC6.1
+        [TestMethod]
+        public void InvokeMethod_GivenHappy_ReturnHappy()
+        {
+            string expected = "HAPPY";
+            string actual = MoodAnalyserFactory.InvokeMethod("AnalyseMood", "HAPPY");
+            Assert.AreEqual(expected, actual);
+        }
+        //6.2
+        [TestMethod]
+        public void InvokeMethod_GivenImproperMethod_ReturnException()
+        {
+            try
+            {
+                object obj = MoodAnalyserFactory.InvokeMethod("Analysemood", "HAPPY");
+            }
+            catch (MoodAnalyszerCustomException e)
+            {
+                Assert.AreEqual("Method is not found", e.Message);
+            }
+        }
 
     }
 }
